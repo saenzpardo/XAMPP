@@ -27,29 +27,35 @@ function DatabaseConnect()
     return $conn;
 }
 
-// $servername = "localhost";
-// $username = "movie_user";
-// $password = "S2yV43uTx5egr9gl";
-// $db_name = "movienight";
 
-// # Create Connection
-// $conn = mysqli_connect($servername, $username, $password, $db_name);
+function DatabaseConnectRead() {
+    $servername = "localhost";
+    $username = "movie_user";
+    $password = "S2yV43uTx5egr9gl";
+    $db_name = "movienight";
 
-// # Check connection
-// if (!$conn) {
-//     die("Connection failed: " . mysqli_connect_error());
-// }
+    # Create Connection
+    $conn = mysqli_connect($servername, $username, $password, $db_name);
 
-// Run SQL statement
-# echo "<h2 style='color: lightblue; text-align: center;'>Connected to database |<em> $db_name</em> | successfully... </h1> ";
+    # Check connection
+    if (!$conn) {
+        die("Connection failed: " . mysqli_connect_error());
+    }
+    return $conn;
+}
+$servername = "localhost";
+$username = "movie_user";
+$password = "S2yV43uTx5egr9gl";
+$db_name = "movienight";
 
-// write statement
-// $sql = "SELECT * FROM movie 
-// LEFT JOIN members ON movie.member_id = members.member_id 
-// ORDER BY date;";
+# Create Connection
+$conn = mysqli_connect($servername, $username, $password, $db_name);
 
-// $result = mysqli_query($conn, $sql);
-// $numberOfRecords = mysqli_num_rows($result);
+# Check connection
+if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
+}
+
 
 # method to get movies
 function FetchAllMovies($conn) {

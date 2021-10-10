@@ -10,50 +10,86 @@
         <!-- Bootstrap -->
         <link rel="stylesheet" href="css/bootstrap.css">
         <script src="js/bootstrap.bundle.js" type="text/javascript"></script>
-        <?php 
-            require_once __DIR__ . '/vendor/autoload.php'; # composer
-            require_once 'database.php'; # database connection file
-
-            $conn = DatabaseConnect();
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="css/custom-css.css">
+        <?php
+            require_once 'database.php';
         ?>
     </head>
     <body>
+    <div class='container'>
+        <div class='jumbotron'>           
+        <h1 class='header'>WHO'S TURN IS IT??</h1>
+        </div>    
+    </div>
+    <div class='container'>
+        <div class='row'>
+            <div class='col'>
+               <article>
+                   <p>This site has been written to keep track of who got to pick the last movie during movie/pizza night.</p>
+                </article> 
+            </div>
+            <div class='col'>
+                <article>
+                    <p>It was written in HTML5/CSS and the database connection was made with PHP</p>
+                </article>               
+            </div>
+        </div>                   
+    </div>    
+    <div class='container m-lg-2'>      
+                <?php
+                   $conn = DatabaseConnectRead();
+                    // write statement
+                    $sql = "SELECT * FROM movie 
+                    LEFT JOIN members ON movie.member_id = members.member_id 
+                    ORDER BY date;";
 
-    <!-- database connection message  -->
-    <?="<h2 style='color: lightblue; text-align: center;'>Connected to database |<em> $db_name</em> | successfully... </h1> ";?>
-        
-    <?="<h3 style='color: darkgray; text-align: center;'>* $numberOfRecords * database record(s) discovered:</h3>";?>
-
-    <?php
-        
-        // if (mysqli_num_rows($result) > 0) {
-        //     // output the data
-        //     while($row = mysqli_fetch_assoc($result)) {
-        //         echo ("<p style='color: white; text-align: center;'>" .$row["first_name"] . " | " . $row["movie_name"] . " | " . $row["date"] . "</p><br><br>");
-        //     }
-        // } else {
-        //     echo "No results found";
-        // }
-    ?>
-
-    <form style='text-align: center;' action="#" method="GET">
-    <b style='color: white;'>Add a New Record</b><br>
-    <select name="first_name">
-    <option value="name1">Adam</option>
-    <option value="name2">Katie</option>
-    <option value="name3">Evelyn</option>
-    <option value="name4">Alice</option>
-    </select>
-    <labe style='color: white;'>Movie</label><br>
-    <input type="text" movie="movie" size="30" value="" />
-
+                    $result = mysqli_query($conn, $sql);
+                    $numberOfRecords = mysqli_num_rows($result);
+                    if($result) {
+                        echo '<table class="table table-striped">
+                        <thead style="font: bold;">
+                        <tr><td><b>Name</b></td>
+                        <td><b>Movie</b></td>
+                        <td><b>Date</b></td></tr></thead>';
+                        echo '<tbody';
+                   while($row = mysqli_fetch_assoc($result)) {
+                       
+                       echo "<tr><td>" . $row['first_name'] .
+                            "</td><td>" . $row['movie_name'] . 
+                            "</td><td>" . $row['date'] .
+                            "</td></tr>";
+                       }
+                       echo '</tbody></table>';
+                    }
+                ?>                      
+    </div>    
+   
+    <div class='container'>
+        <h3 class=''>Add a new record</h3>
+    </div>
     
+    <div class='container'>  
+        <form action="add-record.php"name="insert" method="POST">
+            <select class='form-select' name="member_id">
+                <option value="1">Adam</option>
+                <option value="2">Katie</option>
+                <option value="3">Evelyn</option>
+                <option value="4">Alice</option>
+            </select>
+        </form>
+    </div>
+<div class='container'>
+<div class="container">
+    <form action="add-record.php" name="movie-name" method="POST">
+        <label>Movie Name:</label>
+        <input type="text" name="movie_name">       
     </form>
+</div>
+<button type="submit" action="add-record.php" class="btn btn-primary" method="POST">Add Record</button>
+</div>
 
-    
 
-<div style='text-align: center;'>
-<button>Add Record</button></div>
 
 
         
