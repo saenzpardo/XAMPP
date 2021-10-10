@@ -1,18 +1,23 @@
 <?php
-# responsible for making database connection
+### README  ###
+/* 
+DB IDs start at 1 except userID - userID starts at 99
+database.php file is responsible for making database connection
+and hosts the methods for the queries
+*/
 
 # Create connection
 function DatabaseConnect()
 {
-    # username, password and database name should be stored outside of webroot folder for security
+    # username, password and database name stored outside of webroot folder for security
     $servername = "localhost";
 
     # get config parsed from app ini file - relative path
     $config = parse_ini_file("../../webapp.env");
 
     # setup variables to hold corresponding parse_ini values
-    $username = $config['username'];
-    $password = $config['password'];
+    $username = $config['readonly_username'];
+    $password = $config['readonly_password'];
     $database = $config['database'];
 
     $conn = mysqli_connect($servername, $username, $password, $database);
@@ -24,91 +29,74 @@ function DatabaseConnect()
     return $conn;
 }
 
-# store connection function in variable
-// $connection = DatabaseConnect();
-
-# Exercise 1
-function GetProducts($conn) {
-
+# get all products
+function GetProducts($conn) {   
     $query = "SELECT * FROM products;";
+
     $statement= mysqli_prepare($conn, $query);
-    mysqli_stmt_execute($statement);
-    $result = mysqli_query($conn, $query); # places results from query into variable
-    $row = mysqli_stmt_get_result($statement); # puts results into associative array
+    mysqli_stmt_execute($statement);    
+    $result = mysqli_stmt_get_result($statement); 
 
     $arrOut = array();
-    while($row = mysqli_fetch_assoc($result)) {
+    while($row = mysqli_fetch_assoc($result)) {     # puts results into associative array
         array_push($arrOut, $row);
-    }
+    }    
     return $arrOut;
 }
 
-// echo "<h2>Exercise 1</h2>";
-// $testGetProducts = GetProducts($connection);
-// print_r($testGetProducts); # show results
-
-# Excercise 2
+# get products by productId
 function GetProductDetail($conn, $productId) {
 
     $query = "SELECT * FROM products, screenshots, productreviews
               WHERE screenshots.ProductId = products.ProductId
               AND productreviews.ProductId = products.ProductId
-              AND ProductId = ?;";
+              AND products.ProductId = ?;";         # product ID starts at 1
     
     $statement = mysqli_prepare($conn, $query);    
     mysqli_stmt_bind_param($statement, "i", $productId);
     mysqli_stmt_execute($statement);
     $result = mysqli_stmt_get_result($statement);
 
-    while($row = mysqli_fetch_assoc($result)) {
-        print_r($row);
+    $arrOut = array();
+    while($row = mysqli_fetch_assoc($result)) {     # puts results into associative array
+        array_push($arrOut, $row);
     }
-    return array();
+    return $arrOut;
 }
 
-// echo "<h2>Exercise 2</h2>";
-// echo "<br>";
-// $testGetProductDetail = GetProductDetail($connection, 1);
-// print_r($testGetProductDetail); # show results
-
-# Exercise 3
+# get orders by userId
 function GetOrders($conn, $userId) {
     $query = "SELECT * FROM orders
-              WHERE orders.userId = ?;";
+              WHERE orders.userId = ?;";            # userId starts at 99
       
     $statement = mysqli_prepare($conn, $query);    
     mysqli_stmt_bind_param($statement, 'i', $userId);
     mysqli_stmt_execute($statement);    
     $result = mysqli_stmt_get_result($statement);
 
-    while($row = mysqli_fetch_assoc($result)) {
-        print_r($row);
-    }   
-    return array();
+    $arrOut = array();
+    while($row = mysqli_fetch_assoc($result)) {     # puts results into associative array
+        array_push($arrOut, $row);
+    }
+    return $arrOut;
 }
 
-// echo "<h2>Exercise 3</h2>";
-// $testGetOrders = GetOrders($connection, 99);
-
-# Exercise 4
+# get orders by orderId
 function GetOrder($conn, $order) {
-    $query = "SELECT * FROM orders, orderitems,
+    $query = "SELECT * FROM orders, orderitems
               WHERE orders.orderId = orderitems.orderId
-              AND orders.orderId = ?;";
+              AND orders.orderId = ?;";             # orderID starts at 1
 
     $statement = mysqli_prepare($conn, $query);  
     mysqli_stmt_bind_param($statement, 'i', $order);
     mysqli_stmt_execute($statement);    
     $result = mysqli_stmt_get_result($statement);
 
-    while($row = mysqli_fetch_assoc($result)) {
-        print_r($row);
-    }   
-    return array();
+    $arrOut = array();
+    while($row = mysqli_fetch_assoc($result)) {     # puts results into associative array
+        array_push($arrOut, $row);
+    }
+    return $arrOut;
 }
-
-// echo "<h2>Exercise 4</h2>";
-// $testGetOrder = GetOrders($connection, 1);
-// print_r($testGetOrder); # show results
 
 ?>

@@ -1,12 +1,10 @@
 <?php
 
-# composer link
 require_once __DIR__ . '/vendor/autoload.php';
 require_once 'database.php';
-header('Content-Type: application/json'); # content type JSON because this is a REST endpoint
+header('Content-Type: application/json'); 
 
-# create a new AltoRouter object
-$router = new AltoRouter();      # ignore this undefined type error
+$router = new AltoRouter();      
 $router->setBasePath('/movies');
 
 # endpoint
