@@ -67,8 +67,7 @@
    
     <div class='container'>
         <h3 class=''>Add a new record</h3>
-    </div>
-    
+    </div>    
     <div class='container'>  
         <form action="add-record.php"name="insert" method="POST">
             <select class='form-select' name="member_id">
@@ -77,17 +76,21 @@
                 <option value="3">Evelyn</option>
                 <option value="4">Alice</option>
             </select>
-        </form>
+            <label>Movie Name:</label>
+            <input type="text" name="movie_name">     
+            <button class="btn btn-outline-danger" type="submit" >Submit</button>  
+        </form>       
     </div>
 <div class='container'>
-<div class="container">
-    <form action="add-record.php" name="movie-name" method="POST">
+<!-- <div class="container">
+    <form class="form" action="add-record.php" name="movie-name" method="POST">
         <label>Movie Name:</label>
-        <input type="text" name="movie_name">       
+        <input type="text" name="movie_name">     
+        <input type="submit" action="add-record.php" method="post">  
     </form>
 </div>
 <button type="submit" action="add-record.php" class="btn btn-primary" method="POST">Add Record</button>
-</div>
+</div> -->
 
 
 
