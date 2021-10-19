@@ -1,7 +1,18 @@
 <?php 
+
+
+#####################
+### 21.36 minutes ###
+### Templates 1   ###
+#####################
+
 # responsible for making database connection
 
-# this file should be stored outside of the webroot folder.
+# parameterized query:
+# $statement = mysqli_prepare($connection, $query) -- prepare SQL statement
+# mysqli_stmt_bind_param($statement, "data-type", $parameter) -- bind parameter to SQL
+# mysqli_stmt_execute($statement) -- executes the query statement
+# $result = mysqli_stmt_get_results($statment) -- fetches the result of the statement
 
 # Create connection 
 # this connection will allow read, write, update and delete
@@ -147,6 +158,15 @@ function AddMovie($conn, $name) {
     # bind parameters to statement
     mysqli_stmt_bind_param($statement, "s", $name);
     mysqli_stmt_execute($statement); 
+}
+
+function DeleteMovie($conn, $id) {
+    # DELETE FROM
+    $query = "DELETE FROM movies WHERE movieId = ?;";
+    $statement = mysqli_prepare($conn, $query);
+    mysqli_stmt_bind_param($statement, "i", $id);
+    mysqli_stmt_execute($statement);
+    $result = mysqli_stmt_get_result($statement);
 }
 
 function DeletePerson($conn, $id) {

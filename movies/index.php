@@ -45,6 +45,14 @@ $router->map('GET', '/movies/[i:id]', function($id) {
 
 });
 
+#endpoint
+# map to the movie ID route
+$router->map('DELETE', '/movies/[i:id]', function($id) {
+    $conn = DatabaseConnect();
+    echo json_encode(DeleteMovie($conn, $id));
+
+});
+
 #enpoint
 # map to the person ID route
 $router->map('GET', '/people/[i:id]', function($id) {
