@@ -1,14 +1,8 @@
 <?php 
 
-
-#####################
-### 21.36 minutes ###
-### Templates 1   ###
-#####################
-
 # responsible for making database connection
 
-# parameterized query:
+# parameterized query explained:
 # $statement = mysqli_prepare($connection, $query) -- prepare SQL statement
 # mysqli_stmt_bind_param($statement, "data-type", $parameter) -- bind parameter to SQL
 # mysqli_stmt_execute($statement) -- executes the query statement
