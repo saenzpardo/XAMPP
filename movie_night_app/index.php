@@ -17,8 +17,8 @@
         ?>
     </head>
     <body>
-    <div class='container'>
-        <div class='jumbotron'>           
+    <div class='container '>
+        <div class='jumbotron banner'>           
         <h1 class='header'>WHO'S TURN IS IT??</h1>
         </div>    
     </div>
@@ -36,7 +36,7 @@
             </div>
         </div>                   
     </div>    
-    <div class='container m-lg-2'>      
+    <div class='container'>      
                 <?php
                    $conn = DatabaseConnectRead();
                     // write statement
@@ -47,7 +47,7 @@
                     $result = mysqli_query($conn, $sql);
                     $numberOfRecords = mysqli_num_rows($result);
                     if($result) {
-                        echo '<table class="table table-striped">
+                        echo '<table class="table table-hover table-dark">
                         <thead style="font: bold;">
                         <tr><td><b>Name</b></td>
                         <td><b>Movie</b></td>
@@ -78,7 +78,7 @@
             </select>
             <label>Movie Name:</label>
             <input type="text" name="movie_name">     
-            <button class="btn btn-outline-danger" type="submit" >Submit</button>  
+            <button class="btn btn-outline-light" type="submit" >Submit</button>  
         </form>       
     </div>
 <div class='container'>
