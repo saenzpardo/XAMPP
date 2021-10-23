@@ -17,7 +17,7 @@
         ?>
     </head>
     <body>
-    <div class='container '>
+    <div class='container '>        
         <div class='jumbotron banner'>           
         <h1 class='header'>WHO'S TURN IS IT??</h1>
         </div>    
@@ -75,6 +75,7 @@
                 <option value="2">Katie</option>
                 <option value="3">Evelyn</option>
                 <option value="4">Alice</option>
+               
             </select>
             <label>Movie Name:</label>
             <input type="text" name="movie_name">     

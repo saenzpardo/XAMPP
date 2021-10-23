@@ -32,7 +32,7 @@ function DatabaseConnectRead() {
     $servername = "localhost";
     $username = "movie_user";
     $password = "S2yV43uTx5egr9gl";
-    $db_name = "movienight";
+    $db_name = "movie-night";
 
     # Create Connection
     $conn = mysqli_connect($servername, $username, $password, $db_name);
@@ -43,18 +43,18 @@ function DatabaseConnectRead() {
     }
     return $conn;
 }
-$servername = "localhost";
-$username = "movie_user";
-$password = "S2yV43uTx5egr9gl";
-$db_name = "movienight";
+// $servername = "localhost";
+// $username = "movie_user";
+// $password = "S2yV43uTx5egr9gl";
+// $db_name = "movie-night";
 
-# Create Connection
-$conn = mysqli_connect($servername, $username, $password, $db_name);
+// # Create Connection
+// $conn = mysqli_connect($servername, $username, $password, $db_name);
 
-# Check connection
-if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
-}
+// # Check connection
+// if (!$conn) {
+//     die("Connection failed: " . mysqli_connect_error());
+// }
 
 
 # method to get movies

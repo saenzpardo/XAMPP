@@ -6,10 +6,15 @@
 
 require_once __DIR__ . '/vendor/autoload.php';
 require_once 'database.php';
-header('Content-Type: application/json'); 
+//header('Content-Type: application/json'); 
 
+# AltoRouter object
 $router = new AltoRouter();      
 $router->setBasePath('/movies');
+
+# plates object
+global $templates;
+$templates = new League\Plates\Engine('templates');
 
 # endpoint
 # map the people route
@@ -23,12 +28,13 @@ $router->map('GET', '/movies', function(){
 
 $router->map('GET', '/movies/new', function(){
     # Add new movies
-    $html = "<html><body><form action='/movies' method='POST'>";
-    $html .= "Name: <input type='text' name='name'><br>";
-    $html .= "Email: <input type='text' name='email'><br>";
-    $html .= "<input type='submit>";
-    $html .= "</form></body></html>";
-    echo $html;
+    // $html = "<html><body><form action='/movies/movies' method='POST'>";
+    // $html .= "Name: <input type='text' name='movie_name'><br>";
+    // $html .= "<button type='submit'>Submit</button>";
+    // $html .= "</form></body></html>";
+    // echo $html;
+    global $templates;
+    echo $templates->render('newMovie');
 
 });
 # process requests
