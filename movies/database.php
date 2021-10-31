@@ -147,7 +147,7 @@ function FetchMoviesForPerson($conn, $id) {
 
 # post methods:
 function AddMovie($conn, $name) {
-    $query = "INSERT INTO people (name) VALUES (?);";
+    $query = "INSERT INTO movies (name) VALUES (?);";
     $statement = mysqli_prepare($conn, $query);
     # bind parameters to statement
     mysqli_stmt_bind_param($statement, "s", $name);

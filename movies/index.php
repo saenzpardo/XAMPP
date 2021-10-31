@@ -12,37 +12,37 @@ require_once 'database.php';
 $router = new AltoRouter();      
 $router->setBasePath('/movies');
 
-# plates object
-global $templates;
-$templates = new League\Plates\Engine('templates');
+
 
 # endpoint
 # map the people route
-$router->map('GET', '/movies', function(){
-    # Code goes here
-    
-    $conn = DatabaseConnectReadOnly();
-    echo json_encode(FetchAllMovies($conn));
+$router->map('GET', '/movies', function($template){
+    $conn = DatabaseConnectReadOnly();    
+  //  echo json_encode(FetchAllMovies($conn));
+    $movies = FetchAllMovies($conn);
+    $template->addData(['movies' => $movies]); # php plates --> use to store data
+    echo $template->render('movielist');
 });
 
+$router->map('POST', '/movies', function($template){
+    $conn = DatabaseConnect();    
+    $name = $_REQUEST['Name'];
 
-$router->map('GET', '/movies/new', function(){
-    # Add new movies
-    // $html = "<html><body><form action='/movies/movies' method='POST'>";
-    // $html .= "Name: <input type='text' name='movie_name'><br>";
-    // $html .= "<button type='submit'>Submit</button>";
-    // $html .= "</form></body></html>";
-    // echo $html;
-    global $templates;
-    echo $templates->render('newMovie');
+    echo json_encode(AddMovie($conn, $name));
+});
 
+$router->map('GET', '/movies/new', function($template){
+    echo $template->render('newmovie'); // draw NewMovie template
 });
 # process requests
 // match current request url
 $match = $router->match();
+# php plates object
+$templates = new League\Plates\Engine('templates');
 
 // call closure or throw 404 status
 if( is_array($match) && is_callable( $match['target'] ) ) {
+    $match['params']['template'] = $templates;  // add this line for use of templates (php plates)
 	call_user_func_array( $match['target'], $match['params'] ); 
 } else {
 	// no route was matched
