@@ -1,18 +1,13 @@
 <?php
 
-#### 38.22 ####
-
-#UI rest
-
 require_once __DIR__ . '/vendor/autoload.php';
 require_once 'database.php';
+require_once 'common.php';
 //header('Content-Type: application/json'); 
 
 # AltoRouter object
 $router = new AltoRouter();      
 $router->setBasePath('/movies');
-
-
 
 # endpoint
 # map the people route
@@ -24,11 +19,19 @@ $router->map('GET', '/movies', function($template){
     echo $template->render('movielist');
 });
 
+# endpoint add movie
 $router->map('POST', '/movies', function($template){
     $conn = DatabaseConnect();    
     $name = $_REQUEST['Name'];
+    $description = $_REQUEST['Description'];
+    # Add movie
+    AddMovie($conn, $name, $description);
 
-    echo json_encode(AddMovie($conn, $name));
+    # Set message   
+    AddAlert("Movie added successfully");
+
+    # Redirect 
+    header("Location: http://localhost/movies/movies"); // will need changed if moved off localhost
 });
 
 $router->map('GET', '/movies/new', function($template){
@@ -39,6 +42,7 @@ $router->map('GET', '/movies/new', function($template){
 $match = $router->match();
 # php plates object
 $templates = new League\Plates\Engine('templates');
+$templates->addData(['alerts'=>GetAlerts()]); // initialize alerts and call GetAlerts method from common.php
 
 // call closure or throw 404 status
 if( is_array($match) && is_callable( $match['target'] ) ) {
@@ -49,6 +53,5 @@ if( is_array($match) && is_callable( $match['target'] ) ) {
 	header( $_SERVER["SERVER_PROTOCOL"] . ' 404 Not Found');
 }
 
-#header('Content-Type: application/json');
 
 ?>

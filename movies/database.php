@@ -144,13 +144,12 @@ function FetchMoviesForPerson($conn, $id) {
     return $out;
 }
 
-
 # post methods:
-function AddMovie($conn, $name) {
-    $query = "INSERT INTO movies (name) VALUES (?);";
+function AddMovie($conn, $name, $description) {
+    $query = "INSERT INTO movies (name, description) VALUES (?,?);";
     $statement = mysqli_prepare($conn, $query);
     # bind parameters to statement
-    mysqli_stmt_bind_param($statement, "s", $name);
+    mysqli_stmt_bind_param($statement, "ss", $name, $description);
     mysqli_stmt_execute($statement); 
 }
 

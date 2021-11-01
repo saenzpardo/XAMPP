@@ -12,13 +12,19 @@
     <!-- JavaScript Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
-    <!-- Bootstrap -->
-    <!-- <link rel="stylesheet" href="../css/bootstrap.css">
-        <script src="../js/bootstrap.bundle.js" type="text/javascript"></script> -->
     <title><?= $this->e($title) ?></title>
 </head>
 
 <body>
+    <?php 
+    # 48.55
+    
+    foreach($alerts as $a) {
+        $this->insert('alert', ['alerts' => $a]);
+    }
+    print_r($_COOKIE);
+    //ClearAlerts();
+    ?>
     <!-- NAV BAR!!! -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
@@ -37,9 +43,6 @@
                 <a href class="btn bg-transparent mr-3" type="submit">Login</a>
                 <a href class="btn btn-outline-success" type="submit">Register</a>
             </div>
-
-
-
         </div>
     </nav>
     <!-- END NAVBAR!!! -->
