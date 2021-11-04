@@ -1,0 +1,49 @@
+
+@charset "utf-8";
+
+html {
+    /* background-image: url('../data/sandstone.jpg');     */
+    background-color: antiquewhite;
+}
+
+.banner {
+   border-radius: 0.9rem;
+}
+
+body {
+   width: 760px;
+   margin-left: auto;
+   margin-right: auto;
+   color: antiquewhite;
+   background-color: #373b3e;
+   border-left: 1px solid rgb(51, 51, 51);
+   border-right: 1px solid rgb(51, 51, 51);
+   box-shadow: rgb(51, 51, 51) 15px 0px 25px,
+               rgb(51, 51, 51) -15px 0px 25px;
+   border-radius: 0.9rem;
+   
+}
+
+.jumbotron {
+   
+   margin: .5rem;
+   margin-top: 2rem;
+   padding: .5rem;
+   background: rgb(2,0,36);
+   background: radial-gradient(circle, rgba(2,0,36,1) 0%, rgba(114,9,121,1) 35%, rgba(0,212,255,1) 100%);
+   box-shadow: rgb(51, 51, 51) 15px 0px 25px,
+               rgb(51, 51, 51) -15px 0px 25px;   
+}
+
+
+h1 {
+   text-align: center;
+   padding: 15px;
+   color: white;
+}
+
+div {
+   text-align: center;
+}
+
+
