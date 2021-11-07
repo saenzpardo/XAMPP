@@ -20,10 +20,13 @@
     # 48.55
     
     foreach($alerts as $a) {
-        $this->insert('alert', ['alerts' => $a]);
+        $this->insert('alerts', ['alerts' => $a]);
     }
-    print_r($_COOKIE);
-    //ClearAlerts();
+    // print_r($alerts);
+
+    # clear alert will clear all cookies and won't render cookies again...method needs relocated.
+
+    // ClearAlerts(); # display alert once
     ?>
     <!-- NAV BAR!!! -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">

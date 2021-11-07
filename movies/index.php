@@ -35,7 +35,9 @@ $router->map('POST', '/movies', function($template){
 });
 
 $router->map('GET', '/movies/new', function($template){
+   
     echo $template->render('newmovie'); // draw NewMovie template
+   
 });
 # process requests
 // match current request url

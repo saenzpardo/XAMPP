@@ -34,11 +34,18 @@ $router->map('GET', '/orders/[i:id]', function($id){
     echo json_encode(GetOrders($conn, $id));
 });
 
-############################################
-#### ALTOROUTER CODE DO NOT DELETE/EDIT ####
-############################################
+##################################################
+#### ALTOROUTER CODE DO NOT DELETE/EDIT       ####
+#### http://altorouter.com/usage/install.html ####
+##################################################
 // match current request url
 $match = $router->match();
+
+###############################################################
+#### PHP Plates: http://platesphp.com/templates/overview/  ####
+###############################################################
+# php plates object
+$templates = new League\Plates\Engine('templates');
 
 // call closure or throw 404 status
 if( is_array($match) && is_callable( $match['target'] ) ) {
