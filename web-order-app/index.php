@@ -7,7 +7,7 @@ require_once __DIR__ . '/vendor/autoload.php';
 require_once 'database.php';     
 require_once 'common.php';               # db methods file
 
-header('Content-Type: application/json');       # content type JSON because API to get DB data
+// header('Content-Type: application/json');       # content type JSON because API to get DB data
 
 # create a new AltoRouter object
 $router = new AltoRouter();
@@ -15,16 +15,22 @@ $router->setBasePath('/web-order-app');         # set root path
 
 # endpoint
 # map the products route
-$router->map('GET', '/products', function(){    # note to self does not work at /products/ only /products
+$router->map('GET', '/products', function($template){    # note to self does not work at /products/ only /products
     $conn = DatabaseConnect();
-    echo json_encode(GetProducts($conn));
+    // echo json_encode(GetProducts($conn));
+    $products = GetProducts($conn);
+    $template->addData(['products' => $products]); # php plates --> use to store
+    echo $template->render('productlist');
 });
 
 # endpoint
 # map the products route by productId
-$router->map('GET', '/products/[i:id]', function($id){
+$router->map('GET', '/products/[i:id]', function($id, $template){
     $conn = DatabaseConnect();
-    echo json_encode(GetProductDetail($conn, $id));
+    // echo json_encode(GetProductDetail($conn, $id));
+    $productById = GetProductDetail($conn, $id);
+    $template->addData(['products'=> $productById]);
+    echo $template->render('productdetails');
 });
 
 # endpoint
@@ -46,7 +52,7 @@ $match = $router->match();
 ###############################################################
 # php plates object
 $templates = new League\Plates\Engine('templates');
-
+$templates->addData(['alerts'=>GetAlerts()]); // initialize alerts and call GetAlerts method from common.php
 // call closure or throw 404 status
 if( is_array($match) && is_callable( $match['target'] ) ) {
 	call_user_func_array( $match['target'], $match['params'] ); 
