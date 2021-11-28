@@ -41,8 +41,8 @@
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                 </form>
 
-                <a href class="btn bg-transparent mr-3" type="submit">Login</a>
-                <a href class="btn btn-outline-success" type="submit">Register</a>
+                <a href="/movies/login" class="btn bg-transparent mr-3">Login</a>
+                <a href="/movies/register" class="btn btn-outline-success">Register</a>
             </div>
         </div>
     </nav>

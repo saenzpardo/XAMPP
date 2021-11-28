@@ -34,6 +34,45 @@ $router->map('POST', '/movies', function($template){
     header("Location: http://localhost/movies/movies"); // will need changed if moved off localhost
 });
 
+# endpoint login
+$router->map('GET', '/login', function($template) {
+    echo $template->render('login');
+});
+
+# endpoint register
+$router->map('GET', '/register', function($template) {
+    echo $template->render('register');
+});
+
+# endpoint POST register
+$router->map('POST', '/register', function($template) {
+    $conn = DatabaseConnect();
+
+    ##############
+    #### 22:03 ###
+    ##############
+    
+    #pull 
+
+    $displayName = $_REQUEST['displayName'];
+    $email = $_REQUEST['email'];
+    $password = $_REQUEST['password'];
+    $confirmPassword = $_REQUEST['confirmPassword'];
+
+    # validation
+    if(strlen(trim($displayName)) == 0) {
+        AddAlert("No display name entered");
+        header("Location: http://localhost/movies/register");
+        return;
+    }
+
+    AddAlert("Registration Successful");
+
+    # Redirect 
+    header("Location: http://localhost/movies/movies"); // will need changed if moved off localhost
+
+});
+
 $router->map('GET', '/movies/new', function($template){
    
     echo $template->render('newmovie'); // draw NewMovie template

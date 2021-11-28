@@ -19,7 +19,7 @@ $router->map('GET', '/products', function($template){    # note to self does not
     $conn = DatabaseConnect();
     // echo json_encode(GetProducts($conn));
     $products = GetProducts($conn);
-    $template->addData(['products' => $products]); # php plates --> use to store
+    $template->addData(['productlist' => $products]); # php plates --> use to store
     echo $template->render('productlist');
 });
 
@@ -29,15 +29,31 @@ $router->map('GET', '/products/[i:id]', function($id, $template){
     $conn = DatabaseConnect();
     // echo json_encode(GetProductDetail($conn, $id));
     $productById = GetProductDetail($conn, $id);
-    $template->addData(['products'=> $productById]);
+    $template->addData(['productdetails'=> $productById]);
     echo $template->render('productdetails');
+});
+
+# endpoint
+# map the login route
+$router->map('GET', '/login', function($template){    # note to self does not work at /products/ only /products
+    $conn = DatabaseConnect();
+    # TODO: create login
+    echo $template->render('login');
+});
+
+# endpoint
+# map the login route
+$router->map('GET', '/register', function($template){    # note to self does not work at /products/ only /products
+    $conn = DatabaseConnect();
+    # TODO: create register
+    echo $template->render('register');
 });
 
 # endpoint
 # map the orders route by userId
 $router->map('GET', '/orders/[i:id]', function($id){
     $conn = DatabaseConnect();
-    echo json_encode(GetOrders($conn, $id));
+   echo json_encode(GetOrders($conn, $id));
 });
 
 ##################################################
