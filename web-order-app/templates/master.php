@@ -7,11 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- CSS only -->
-    <link href="../css/bootstrap.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
     <!-- JavaScript Bundle with Popper -->
-    <script src="../js/bootstrap.bundle.js">
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
     <title><?= $this->e($title) ?></title>
 </head>
@@ -23,13 +22,12 @@
     foreach ($alerts as $a) {
         $this->insert('alert', ['alerts' => $a]);
     }
-    print_r($_COOKIE);
-    //ClearAlerts();
+    ClearAlerts();
     ?>
     <!-- NAV BAR!!! -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Movie Database</a>
+            <a class="navbar-brand" href="/web-order-app/products">Web Order App</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -41,8 +39,8 @@
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                 </form>
 
-                <a href="/movies/login" class="btn bg-transparent mr-3">Login</a>
-                <a href="/movies/register" class="btn btn-outline-success">Register</a>
+                <a href="/web-order-app/login" class="btn bg-transparent mr-3">Login</a>
+                <a href="/web-order-app/register" class="btn btn-outline-success">Register</a>
             </div>
         </div>
     </nav>

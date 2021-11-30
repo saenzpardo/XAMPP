@@ -1,4 +1,5 @@
 
+    <?=print_r($movie)?>
     <div class="col">
         <div class="card">
             <div class="card-body ">

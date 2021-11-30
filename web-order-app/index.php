@@ -3,6 +3,9 @@
 ### I think my relationships are correct, but not 100% ###
 
 # composer link
+
+use League\Plates\Template\Data;
+
 require_once __DIR__ . '/vendor/autoload.php';
 require_once 'database.php';     
 require_once 'common.php';               # db methods file
@@ -19,7 +22,7 @@ $router->map('GET', '/products', function($template){    # note to self does not
     $conn = DatabaseConnect();
     // echo json_encode(GetProducts($conn));
     $products = GetProducts($conn);
-    $template->addData(['productlist' => $products]); # php plates --> use to store
+    $template->addData(['products' => $products]); # php plates --> use to store
     echo $template->render('productlist');
 });
 
@@ -42,11 +45,35 @@ $router->map('GET', '/login', function($template){    # note to self does not wo
 });
 
 # endpoint
+# map POST login route
+$router->map('POST', '/login', function($template) {
+    $conn = DatabaseConnect();
+
+    #######
+    # TODO: Add login code
+
+    # Redirect
+    header("Location: http://localhost/web-order-app/products");
+});
+
+# endpoint
 # map the login route
 $router->map('GET', '/register', function($template){    # note to self does not work at /products/ only /products
     $conn = DatabaseConnect();
     # TODO: create register
     echo $template->render('register');
+});
+
+# endpoint
+# map POST register route
+$router->map('POST', '/register', function($template) {
+    $conn = DatabaseConnect();
+
+    #######
+    # TODO: Add register code
+
+    # Redirect
+    header("Location: http://localhost/web-order-app/products");
 });
 
 # endpoint
@@ -71,6 +98,7 @@ $templates = new League\Plates\Engine('templates');
 $templates->addData(['alerts'=>GetAlerts()]); // initialize alerts and call GetAlerts method from common.php
 // call closure or throw 404 status
 if( is_array($match) && is_callable( $match['target'] ) ) {
+    $match['params']['template'] = $templates;  // add this line for use of templates (php plates)
 	call_user_func_array( $match['target'], $match['params'] ); 
 } else {
 	// no route was matched

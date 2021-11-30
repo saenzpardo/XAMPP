@@ -1,4 +1,4 @@
-<?php $this->layout('master', ['title' => 'Movie List']) ?>
+<?php $this->layout('master', ['title' => 'Login']) ?>
 
 <!-- login -->
 
