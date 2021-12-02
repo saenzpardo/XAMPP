@@ -23,7 +23,4 @@ function GetAlerts() {
 function ClearAlerts() {
     setcookie('alerts', json_encode(array()));
 }
-
-
-
 ?>

@@ -66,6 +66,30 @@ $router->map('POST', '/register', function($template) {
         return;
     }
 
+    if(strlen(trim($email)) == 0) {
+        AddAlert("No email entered");
+        header("Location: http://localhost/movies/register");
+        return;
+    }
+
+    if(strlen(trim($password)) == 0) {
+        AddAlert("No password entered");
+        header("Location: http://localhost/movies/register");
+        return;
+    }
+
+    if(strlen(trim($confirmPassword)) == 0) {
+        AddAlert("Password does not match");
+        header("Location: http://localhost/movies/register");
+        return;
+    }
+
+    if(strlen(trim($password)) != strlen(trim($confirmPassword))) {
+        AddAlert("Password does not match");
+        header("Location: http://localhost/movies/register");
+        return;
+    }
+
     AddAlert("Registration Successful");
 
     # Redirect 

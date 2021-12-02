@@ -1,16 +1,9 @@
 <?php
-### Mr. Versaw -> I added an entry into my "web_order_db" to test these methods.  Let me know if you have seed data to use ###
-### I think my relationships are correct, but not 100% ###
-
-# composer link
-
 use League\Plates\Template\Data;
 
 require_once __DIR__ . '/vendor/autoload.php';
 require_once 'database.php';     
 require_once 'common.php';               # db methods file
-
-// header('Content-Type: application/json');       # content type JSON because API to get DB data
 
 # create a new AltoRouter object
 $router = new AltoRouter();
@@ -31,8 +24,8 @@ $router->map('GET', '/products', function($template){    # note to self does not
 $router->map('GET', '/products/[i:id]', function($id, $template){
     $conn = DatabaseConnect();
     // echo json_encode(GetProductDetail($conn, $id));
-    $productById = GetProductDetail($conn, $id);
-    $template->addData(['productdetails'=> $productById]);
+    $products = GetProductDetail($conn, $id);
+    $template->addData(['products'=> $products]);
     echo $template->render('productdetails');
 });
 
@@ -50,7 +43,7 @@ $router->map('POST', '/login', function($template) {
     $conn = DatabaseConnect();
 
     #######
-    # TODO: Add login code
+    # TODO: Add login code - not required for final
 
     # Redirect
     header("Location: http://localhost/web-order-app/products");
@@ -70,7 +63,7 @@ $router->map('POST', '/register', function($template) {
     $conn = DatabaseConnect();
 
     #######
-    # TODO: Add register code
+    # TODO: Add register code - not required for final
 
     # Redirect
     header("Location: http://localhost/web-order-app/products");
